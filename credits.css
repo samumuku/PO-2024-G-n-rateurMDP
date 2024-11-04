@@ -1,0 +1,119 @@
+/*************************HEADER****************************/
+body {
+  font-family: "Istok Web", sans-serif;
+  background-color: white;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: #050038;
+  height: 100px;
+  width: auto;
+}
+
+.titre {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.logo-etml {
+  display: flex;
+  align-items: center;
+}
+
+.ligne-separation {
+  font-size: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 180px;
+  color: #0000ac;
+}
+
+/**********************MAIN**************************/
+main {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.all {
+  background-color: #f3efed;
+  margin-left: 40px;
+  margin-right: 40px;
+  border-radius: 25px;
+  padding-bottom: 10px;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.main-devs,
+.main-tester {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-devs img,
+.main-tester img {
+  width: 140px;
+  height: 160px;
+  border-radius: 5%;
+}
+
+.info-gonzalo,
+.info-thomas,
+.info-samuel,
+.info-CH,
+.info-romain,
+.info-fabre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%; /* Ajustement pour avoir de la place pour tous les éléments */
+  padding: 0px; /* Ajout de padding pour de l'espace */
+  box-sizing: border-box; /* Pour s'assurer que les marges ne dépassent pas */
+}
+
+.main-tester {
+  margin-top: 0px; /* Ajouté pour donner un peu d'espace après la section devs */
+}
+
+/**********************FOOTER**************************/
+footer {
+  display: flex;
+  flex-direction: row;
+  background-color: #0000ac;
+  color: white;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px;
+  justify-content: center;
+  position: fixed;
+  bottom: 4px;
+  left: 40px;
+  right: 40px;
+  margin: 0 4px;
+}
+
+.etml-retour a {
+  text-decoration: none;
+  color: white;
+}
+
+.team-retour a {
+  color: white;
+  text-decoration: none;
+  padding-left: 4px;
+}
