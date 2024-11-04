@@ -1,6 +1,6 @@
 <!-- TUTO utiliser un .md : Ouvrir sur visual studio code, clique droit sur le nom du fichier en haut a gauche, ''Open Preview'' -->
 
-# P_PROD - GESTIONNAIRE DE MOT DE PASSE
+# P_PROD - Générateur de mot de passe
 
 ##
 
