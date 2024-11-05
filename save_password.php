@@ -19,10 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get the form data
     $savedPassword = $conn->real_escape_string($_POST['savedPassword']);
     
-    $savedPassword = password_hash($savedPassword, PASSWORD_DEFAULT);
+    $hashedPassword = password_hash($savedPassword, PASSWORD_DEFAULT);
 
     // Prepare and execute SQL statement
-    $sql = "INSERT INTO t_password (savedPassword) VALUES ('$savedPassword')";
+    $sql = "INSERT INTO t_password (savedPassword) VALUES ('$hashedPassword')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Password saved successfully!";

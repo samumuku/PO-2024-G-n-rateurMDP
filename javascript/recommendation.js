@@ -50,7 +50,7 @@ function validatePassword() {
   }
 
   // Validate special characters
-  var specialChars = /[!@#$%^&*(),.?":{}|<>]/g;
+  var specialChars = /[!@#$%^&*()/,.?":{}|<>]/g;
   if (passwordWritten.value.match(specialChars)) {
     special.classList.remove("invalid");
     special.classList.add("valid");
