@@ -1,43 +1,55 @@
-var password = document.getElementById("password");
-
-function copyPassword() {
-  var copyText = document.getElementById("password");
-  copyText.select();
-  document.execCommand("copy");
-}
+var passwordInput = document.getElementById("password");
 
 function genPassword() {
   var chars = "";
-  if (document.getElementById("chiffres").checked) {
-    chars += "0123456789";
+  var containsNumbers = document.getElementById("chiffres").checked;
+  var containsSpecialChar = document.getElementById("chr-speciaux").checked;
+  var containsUppercase = document.getElementById("majuscule").checked;
+
+  if (containsNumbers) {
+    chars += "01234567890123456789";
   }
-  if (document.getElementById("chr-speciaux").checked) {
-    chars += "*%&/)(=?!@#";
+  if (containsSpecialChar) {
+    chars += "*%&?/[%])#*@[!*](@=?!@#";
   }
-  if (document.getElementById("majuscule").checked) {
+  if (containsUppercase) {
     chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   }
-  chars += "abcdefghijklmnopqrstuvwxyz";
+  chars += "abcdefghijklmnopqrstuvwxyz"; //mettre des minuscules par defaut
 
   var passwordLength = document.getElementById("slider").value;
-
   var password = "";
 
   for (var i = 0; i <= passwordLength - 1; i++) {
-    var randomNumber = Math.floor(Math.random() * chars.length);
+    const randomNumber = Math.floor(Math.random() * chars.length);
     password += chars.charAt(randomNumber);
   }
-
-  // Set the generated password in the input field
   document.getElementById("password").value = password;
 
-  // Validate the generated password
   validatePassword();
 }
 
-// Function to copy password to clipboard
+function validatePassword(
+  password,
+  containsNumbers,
+  containsSpecialChar,
+  containsUppercase
+) {
+  for (var value; value != true; ) {
+    clearInput();
+    genPassword();
+    if (containsNumbers && !/[0-9]/.test(password)) return false;
+    if (containsSpecialChar && !/[*%&/)(=?!@#]/.test(password)) return false;
+    if (containsUppercase && !/[A-Z]/.test(password)) return false;
+    return true;
+  }
+}
+
 function copyPassword() {
-  var copyText = document.getElementById("password");
-  copyText.select();
+  passwordInput.select();
   document.execCommand("copy");
+}
+
+function clearInput() {
+  document.getElementById("password").value = "";
 }

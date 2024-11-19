@@ -1,51 +1,45 @@
 /*************************HEADER****************************/
 body {
   font-family: "Borna", sans-serif;
+  background-color: white;
 }
 header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  color: #050038;
-  height: 100px;
-  width: auto;
+  padding-bottom: 10px;
+  padding-top: 7px;
 }
 
 .titre {
   flex-grow: 1;
   display: flex;
-  justify-content: center;
+  justify-content: end;
   text-align: center;
+  color: #1124bb;
+  font-size: 12px;
+  padding-right: 40px;
 }
 
-.logo-etml {
-  display: flex;
-  align-items: center;
-}
-
-.ligne-separation {
-  font-size: 70px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding-left: 180px;
-  color: #0000ac;
+.logo-etml img {
+  width: auto;
+  height: 57px;
+  padding-left: 22px;
 }
 
 /**********************MAIN**************************/
 main {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
 }
 
 .all {
   background-color: #f3efed;
-  margin-left: 40px;
-  margin-right: 40px;
-  border-radius: 25px;
-  padding-bottom: 10px;
+  border-radius: 100px 0px 0px 0px;
+  margin-left: 22px;
+  margin-right: 22px;
+  width: 1844px;
+  height: 700px;
 }
 
 h2 {
@@ -93,26 +87,28 @@ h2 {
 footer {
   display: flex;
   flex-direction: row;
-  background-color: #0000ac;
+  background-color: #f3efed;
   color: white;
   border-style: solid;
   border-width: 1px;
-  border-radius: 20px;
+  border-radius: 100px 0px 0px 0px;
   justify-content: center;
   position: fixed;
-  bottom: 4px;
   left: 40px;
+  bottom: 0;
   right: 40px;
   margin: 0 4px;
+  height: 90px;
+  font-size: 30px;
 }
 
 .etml-retour a {
   text-decoration: none;
-  color: white;
+  color: #0000ac;
 }
 
 .team-retour a {
-  color: white;
+  color: #0000ac;
   text-decoration: none;
   padding-left: 4px;
 }
