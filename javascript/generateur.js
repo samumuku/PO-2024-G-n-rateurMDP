@@ -1,48 +1,60 @@
 var passwordInput = document.getElementById("password");
 
 function genPassword() {
-  var chars = "";
+  var chars = "abcdefghijklmnopqrstuvwxyz"; // mettre des minuscules par défaut
   var containsNumbers = document.getElementById("chiffres").checked;
   var containsSpecialChar = document.getElementById("chr-speciaux").checked;
   var containsUppercase = document.getElementById("majuscule").checked;
 
+  var numbers = "0123456789";
+  var specialChars = "*%&?/[%])#*@";
+  var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  var requiredChars = "";
+
   if (containsNumbers) {
-    chars += "01234567890123456789";
+    chars += numbers;
+    requiredChars += numbers.charAt(Math.floor(Math.random() * numbers.length));
   }
   if (containsSpecialChar) {
-    chars += "*%&?/[%])#*@[!*](@=?!@#";
+    chars += specialChars;
+    requiredChars += specialChars.charAt(
+      Math.floor(Math.random() * specialChars.length)
+    );
   }
   if (containsUppercase) {
-    chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    chars += uppercase;
+    requiredChars += uppercase.charAt(
+      Math.floor(Math.random() * uppercase.length)
+    );
   }
-  chars += "abcdefghijklmnopqrstuvwxyz"; //mettre des minuscules par defaut
 
   var passwordLength = document.getElementById("slider").value;
-  var password = "";
+  var password = requiredChars;
 
-  for (var i = 0; i <= passwordLength - 1; i++) {
+  for (var i = requiredChars.length; i < passwordLength; i++) {
     const randomNumber = Math.floor(Math.random() * chars.length);
     password += chars.charAt(randomNumber);
   }
-  document.getElementById("password").value = password;
 
-  validatePassword();
+  document.getElementById("password").value = shuffleString(password);
 }
 
-function validatePassword(
-  password,
-  containsNumbers,
-  containsSpecialChar,
-  containsUppercase
-) {
-  for (var value; value != true; ) {
-    clearInput();
-    genPassword();
-    if (containsNumbers && !/[0-9]/.test(password)) return false;
-    if (containsSpecialChar && !/[*%&/)(=?!@#]/.test(password)) return false;
-    if (containsUppercase && !/[A-Z]/.test(password)) return false;
-    return true;
+function shuffleString(string) {
+  var array = string.split("");
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
   }
+
+  return array.join("");
 }
 
 function copyPassword() {
