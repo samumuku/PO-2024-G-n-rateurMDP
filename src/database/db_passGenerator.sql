@@ -1,5 +1,5 @@
 
-DROP DATABASE IF EXISTS db_passGenerator;
+DROP DATABASE IF EXISTS db_passgenerator;
 
 CREATE DATABASE IF NOT EXISTS db_passgenerator;
 
