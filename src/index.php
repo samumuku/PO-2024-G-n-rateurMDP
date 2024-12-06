@@ -83,7 +83,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resetBtn'])) {
                   <form action="" method="POST"><input type="submit" id="resetBtn" name="resetBtn" value="Réinitialiser"/></form>
                 <?php endif ?>
             </div>
-            <?php echo isset($savedPassword) && $savedPassword !== ''  ? 'Mot de passe en claire: <span class="mdp-clear">' . $savedPassword . "</span></br>": '' ?>
             <?php echo isset($hashedPassword) ? 'Mot de passe haché: <span class="mdp-hashed">' . $hashedPassword . "</span>": '' ?>
             
           </div>
