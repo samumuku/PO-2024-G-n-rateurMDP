@@ -1,47 +1,42 @@
 <?php
 
-$host = 'db';  // Use the MySQL service name as the host inside Docker
+$host = 'db';
 $dbName = 'db_passgenerator';
-$mySqlUser = 'root';  // Or use 'user' if you want to use the custom user
-$mySqlPassword = 'rootpassword';  // Match the root password from your docker-compose.yml
+$mySqlUser = 'root';
+$mySqlPassword = 'rootpassword';
 
 $conn = new mysqli($host, $mySqlUser, $mySqlPassword, $dbName);
 
-// Check connection
 if ($conn->connect_error) {
-    error_log("Connection failed: " . $conn->connect_error);  // Log error
-    die("Connection to database failed.");
+    error_log("Connexion échouée: " . $conn->connect_error);
+    die("Connexion à la base de données a échouée.");
 }
 
-echo "Connected successfully<br>";
+echo "Connexion avec succès<br>";
 
-// Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the form data
+
     $savedPassword = $_POST['savedPassword'] ?? '';
 
-    // Validate input
     if (empty($savedPassword)) {
         echo "Password cannot be empty!";
         exit;
     }
 
-    // Hash the password
     $hashedPassword = password_hash($savedPassword, PASSWORD_DEFAULT);
 
-    // Prepare and execute SQL statement
     $stmt = $conn->prepare("INSERT INTO t_password (savedPassword) VALUES (?)");
     $stmt->bind_param("s", $hashedPassword);
 
     if ($stmt->execute()) {
-        echo "Password saved successfully!";
+        echo "Mot de passe enregistré avec succès!";
+        echo ""
     } else {
-        echo "Error: " . $stmt->error;
+        echo "Erreur: " . $stmt->error;
     }
 
     $stmt->close();
 }
 
-// Close the database connection
 $conn->close();
 ?>

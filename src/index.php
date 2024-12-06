@@ -1,3 +1,52 @@
+<?php
+
+$host = 'db';
+$dbName = 'db_passgenerator';
+$mySqlUser = 'root';
+$mySqlPassword = 'rootpassword';
+$msg = '';
+
+$conn = new mysqli($host, $mySqlUser, $mySqlPassword, $dbName);
+
+if ($conn->connect_error) {
+    error_log("Connexion échouée: " . $conn->connect_error);
+    die("Connexion à la base de données a échouée.");
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['hash'])) {
+
+    $savedPassword = $_POST['savedPassword'] ?? '';
+
+    if (empty($savedPassword)) {
+        $msg = "Veuillez saisir un mot de passe !";
+    } else {
+
+      $hashedPassword = password_hash($savedPassword, PASSWORD_DEFAULT);
+
+      $stmt = $conn->prepare("INSERT INTO t_password (savedPassword) VALUES (?)");
+      $stmt->bind_param("s", $hashedPassword);
+
+      if ($stmt->execute()) {
+          $msg = "Mot de passe enregistré avec succès!";
+      } else {
+          $msg = "Erreur: " . $stmt->error;
+      }
+
+      $stmt->close();
+    }
+}
+
+$conn->close();
+
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resetBtn'])) {
+  $msg = '';
+  unset($savedPassword);
+  unset($hashedPassword);
+  $_POST = array();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -19,13 +68,28 @@
         <img src="./images/etml-removebg-preview.png" alt="Logo ETML" />
       </div>
       <div class="titre">
-        <h1>Introduction au monde de l'encryptage des mots de passe!</h1>
+        <h1>Introduction au monde du chiffrement des mots de passe!</h1>
       <div>
     </header>
     <main>
         <div class="all">
-              <h2>Créez votre mot de passe </h2>
-              <form action="save_password.php" method="POST">
+        <div class="header">
+          <h2>Créez votre mot de passe </h2>
+        <?php if (isset($msg) && $msg !== ''): ?>
+          <div class="msg">
+            <div class="msg-title">
+                <?php echo isset($msg) ? "<h3>" . $msg. '</h3>' : '' ?>
+                <?php if ($msg == 'Veuillez saisir un mot de passe !' || $msg = 'Mot de passe enregistré avec succès'): ?>
+                  <form action="" method="POST"><input type="submit" id="resetBtn" name="resetBtn" value="Réinitialiser"/></form>
+                <?php endif ?>
+            </div>
+            <?php echo isset($savedPassword) && $savedPassword !== ''  ? 'Mot de passe en claire: <span class="mdp-clear">' . $savedPassword . "</span></br>": '' ?>
+            <?php echo isset($hashedPassword) ? 'Mot de passe haché: <span class="mdp-hashed">' . $hashedPassword . "</span>": '' ?>
+            
+          </div>
+        <?php endif ?>
+        </div>
+              <form action="" method="POST">
                 <div class="mdp-buttons">
                   <div class="mdp-texte" id="mdp-texte">
                     <input type="text" id="password" name="savedPassword" placeholder="Mot de passe" maxlength="16"/>
@@ -37,7 +101,7 @@
                   </div>
                   <div class="liste-buttons">
                     <input class ="generer" type="button" value="Générer" onclick="genPassword()" />
-                    <input class="hacher" type="submit" value="Hacher" />
+                    <input class="hacher" type="submit" name="hash" value="Hacher" />
                   </form>
                   </div>
                 </div>
