@@ -27,7 +27,7 @@ function validatePassword() {
   validateRule(/[a-z]/, letter, password); // Minuscules
   validateRule(/[A-Z]/, capital, password); // Majuscules
   validateRule(/[0-9]/, number, password); // Chiffres
-  validateRule(/[!@#$%^&*()/,.?":{}|<>[\]]/, special, password); // Caractères spéciaux
+  validateRule(/[!@#$%^&=*()/,.?":{}|<>[\]]/, special, password); // Caractères spéciaux
   validateLengthRule(password); // Validation de la longueur
 
   // Mise à jour de l'estimation du temps de craquage
@@ -140,7 +140,7 @@ function genPassword() {
   var containsUppercase = document.getElementById("majuscule").checked;
 
   var numbers = "0123456789";
-  var specialChars = "*%&?/[%])#*@";
+  var specialChars = "*%&?/=[%])#*@";
   var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
   var requiredChars = "";
